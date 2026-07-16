@@ -1,0 +1,49 @@
+{
+  "name": "AI RankBox - AI工具排行榜",
+  "short_name": "AI RankBox",
+  "description": "汇聚5000+优质人工智能工具，涵盖AI写作、AI绘图、AI编程等全领域",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#3b82f6",
+  "orientation": "portrait-primary",
+  "categories": ["productivity", "utilities", "technology"],
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/favicon.ico",
+      "sizes": "16x16",
+      "type": "image/x-icon"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "AI工具排行榜",
+      "short_name": "排行榜",
+      "description": "查看最新的AI工具排行榜",
+      "url": "/ranking",
+      "icons": [{ "src": "/favicon.png", "sizes": "32x32" }]
+    },
+    {
+      "name": "AI资讯",
+      "short_name": "资讯",
+      "description": "浏览最新的AI行业资讯",
+      "url": "/news",
+      "icons": [{ "src": "/favicon.png", "sizes": "32x32" }]
+    },
+    {
+      "name": "搜索AI工具",
+      "short_name": "搜索",
+      "description": "搜索AI工具和应用",
+      "url": "/search/tools",
+      "icons": [{ "src": "/favicon.png", "sizes": "32x32" }]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

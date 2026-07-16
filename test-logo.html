@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>airankbox Logo 测试</title>
+    <link rel="stylesheet" href="/icons/airankbox-logo.css">
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+            background: #f8fafc;
+            padding: 40px;
+            margin: 0;
+        }
+        
+        .test-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        .test-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 20px;
+        }
+        
+        .logo-demo {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .demo-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .demo-label {
+            font-size: 14px;
+            color: #6b7280;
+            font-weight: 500;
+        }
+        
+        .navbar-demo {
+            background: #ffffff;
+            padding: 15px 20px;
+            border-radius: 8px;
+            border: 1px solid #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-section">
+        <h1 class="test-title">airankbox Logo 效果测试</h1>
+        
+        <!-- 导航栏演示 -->
+        <div class="navbar-demo">
+            <div class="airankbox-logo navbar">
+                <div class="logo-icon">
+                    <div class="cube-container">
+                        <div class="cube">
+                            <div class="cube-face cube-top"></div>
+                            <div class="cube-face cube-front"></div>
+                            <div class="cube-face cube-right"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="logo-text">
+                    <span class="logo-ai">AI</span>
+                    <span class="logo-box">-Box</span>
+                </div>
+            </div>
+            <div class="nav-links">
+                <span>首页</span>
+                <span>工具</span>
+                <span>分类</span>
+                <span>关于</span>
+            </div>
+        </div>
+        
+        <!-- 不同尺寸演示 -->
+        <div class="logo-demo">
+            <div class="demo-item">
+                <div class="airankbox-logo">
+                    <div class="logo-icon">
+                        <div class="cube-container">
+                            <div class="cube">
+                                <div class="cube-face cube-top"></div>
+                                <div class="cube-face cube-front"></div>
+                                <div class="cube-face cube-right"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-ai">AI</span>
+                        <span class="logo-box">-Box</span>
+                    </div>
+                </div>
+                <div class="demo-label">标准版</div>
+            </div>
+            
+            <div class="demo-item">
+                <div class="airankbox-logo navbar">
+                    <div class="logo-icon">
+                        <div class="cube-container">
+                            <div class="cube">
+                                <div class="cube-face cube-top"></div>
+                                <div class="cube-face cube-front"></div>
+                                <div class="cube-face cube-right"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-ai">AI</span>
+                        <span class="logo-box">-Box</span>
+                    </div>
+                </div>
+                <div class="demo-label">导航栏版</div>
+            </div>
+            
+            <div class="demo-item">
+                <div class="airankbox-logo icon-only">
+                    <div class="logo-icon">
+                        <div class="cube-container">
+                            <div class="cube">
+                                <div class="cube-face cube-top"></div>
+                                <div class="cube-face cube-front"></div>
+                                <div class="cube-face cube-right"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="logo-text">
+                        <span class="logo-ai">AI</span>
+                        <span class="logo-box">-Box</span>
+                    </div>
+                </div>
+                <div class="demo-label">仅图标版</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2 class="test-title">响应式测试</h2>
+        <p style="color: #6b7280; margin-bottom: 20px;">调整浏览器窗口大小查看响应式效果：</p>
+        
+        <div class="airankbox-logo">
+            <div class="logo-icon">
+                <div class="cube-container">
+                    <div class="cube">
+                        <div class="cube-face cube-top"></div>
+                        <div class="cube-face cube-front"></div>
+                        <div class="cube-face cube-right"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="logo-text">
+                <span class="logo-ai">AI</span>
+                <span class="logo-box">-Box</span>
+            </div>
+        </div>
+        
+        <div style="margin-top: 20px; padding: 15px; background: #f3f4f6; border-radius: 8px; font-size: 14px; color: #4b5563;">
+            <strong>响应式规则：</strong><br>
+            • 移动端（< 768px）：只显示3D图标<br>
+            • 平板端（≥ 768px）：显示图标 + AI-Box文字<br>
+            • 桌面端（≥ 1024px）：更大尺寸显示
+        </div>
+    </div>
+    
+    <div style="text-align: center; margin-top: 40px; color: #9ca3af;">
+        <p>✨ airankbox 3D Logo 已成功集成到网站中！</p>
+        <p>访问主站查看完整效果：<a href="/" style="color: #4A90E2;">返回首页</a></p>
+    </div>
+</body>
+</html> 

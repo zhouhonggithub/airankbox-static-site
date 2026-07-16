@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIRank-Box 搜索功能测试</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+    <div id="app">
+        <div class="container mx-auto px-4 py-8">
+            <h1 class="text-3xl font-bold mb-8 text-center">AIRank-Box 搜索功能测试</h1>
+            
+            <!-- 桌面端搜索组件演示 -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <h2 class="text-xl font-semibold mb-4">桌面端搜索组件</h2>
+                <div class="relative max-w-md">
+                    <div class="relative flex items-center">
+                        <input
+                            v-model="searchQuery"
+                            @keyup.enter="handleSearch"
+                            @focus="showSuggestions = true"
+                            @blur="hideSuggestions"
+                            type="text"
+                            placeholder="搜索AI工具... (按回车搜索)"
+                            class="w-64 pl-4 pr-10 py-2 text-sm bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                        />
+                        <button
+                            @click="handleSearch"
+                            class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- 搜索建议下拉框 -->
+                    <div 
+                        v-show="showSuggestions && searchQuery.length > 0"
+                        class="absolute top-full left-0 right-0 mt-1 bg-white rounded-lg shadow-lg border border-gray-200 z-50 max-h-64 overflow-y-auto"
+                    >
+                        <div class="py-2">
+                            <div 
+                                v-for="suggestion in filteredSuggestions" 
+                                :key="suggestion.id"
+                                @mousedown="selectSuggestion(suggestion)"
+                                class="px-4 py-2 hover:bg-gray-100 cursor-pointer flex items-center space-x-3"
+                            >
+                                <div class="w-8 h-8 bg-gray-200 rounded-md flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                    </svg>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="text-sm font-medium text-gray-900">{{ suggestion.name }}</div>
+                                    <div class="text-xs text-gray-500">{{ suggestion.category }}</div>
+                                </div>
+                            </div>
+                            
+                            <!-- 查看更多结果 -->
+                            <div 
+                                v-if="searchQuery.length > 0"
+                                @mousedown="viewAllResults"
+                                class="px-4 py-2 border-t border-gray-200 hover:bg-gray-100 cursor-pointer"
+                            >
+                                <div class="text-sm text-blue-600 flex items-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    </svg>
+                                    查看"{{ searchQuery }}"的所有搜索结果
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 移动端搜索组件演示 -->
+            <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                <h2 class="text-xl font-semibold mb-4">移动端搜索组件</h2>
+                <div class="relative">
+                    <input
+                        v-model="mobileSearchQuery"
+                        @keyup.enter="handleMobileSearch"
+                        type="text"
+                        placeholder="搜索AI工具... (按回车搜索)"
+                        class="w-full pl-4 pr-10 py-2 text-sm bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                    <button
+                        @click="handleMobileSearch"
+                        class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 搜索结果展示 -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-xl font-semibold mb-4">搜索结果展示</h2>
+                <div v-if="lastSearchQuery" class="mb-4">
+                    <p class="text-gray-600">最后搜索：<span class="font-medium text-blue-600">{{ lastSearchQuery }}</span></p>
+                    <p class="text-sm text-gray-500 mt-1">实际应用中会跳转到：<code class="bg-gray-100 px-2 py-1 rounded">/tools/search/{{ lastSearchQuery }}</code></p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div v-for="tool in mockSearchResults" :key="tool.id" class="border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
+                        <div class="flex items-center space-x-3 mb-2">
+                            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="font-medium text-gray-900">{{ tool.name }}</h3>
+                                <p class="text-sm text-gray-500">{{ tool.category }}</p>
+                            </div>
+                        </div>
+                        <p class="text-sm text-gray-600">{{ tool.description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp, ref, computed } = Vue;
+
+        createApp({
+            setup() {
+                const searchQuery = ref('');
+                const mobileSearchQuery = ref('');
+                const showSuggestions = ref(false);
+                const lastSearchQuery = ref('');
+
+                const suggestions = [
+                    { id: 1, name: 'ChatGPT', category: 'AI对话' },
+                    { id: 2, name: 'Midjourney', category: 'AI绘图' },
+                    { id: 3, name: 'GitHub Copilot', category: 'AI编程' },
+                    { id: 4, name: 'Notion AI', category: 'AI写作' },
+                    { id: 5, name: 'Stable Diffusion', category: 'AI绘图' },
+                    { id: 6, name: 'Claude', category: 'AI对话' },
+                    { id: 7, name: 'Cursor', category: 'AI编程' },
+                    { id: 8, name: 'Jasper', category: 'AI写作' }
+                ];
+
+                const mockSearchResults = ref([
+                    { id: 1, name: 'ChatGPT', category: 'AI对话', description: '强大的AI对话助手，支持多种任务' },
+                    { id: 2, name: 'Midjourney', category: 'AI绘图', description: '专业的AI图像生成工具' },
+                    { id: 3, name: 'GitHub Copilot', category: 'AI编程', description: 'AI代码助手，提高编程效率' }
+                ]);
+
+                const filteredSuggestions = computed(() => {
+                    if (searchQuery.value.length === 0) return [];
+                    return suggestions.filter(item => 
+                        item.name.toLowerCase().includes(searchQuery.value.toLowerCase()) ||
+                        item.category.toLowerCase().includes(searchQuery.value.toLowerCase())
+                    ).slice(0, 5);
+                });
+
+                const handleSearch = () => {
+                    if (searchQuery.value.trim()) {
+                        lastSearchQuery.value = searchQuery.value.trim();
+                        showSuggestions.value = false;
+                        console.log('搜索:', searchQuery.value);
+                    }
+                };
+
+                const handleMobileSearch = () => {
+                    if (mobileSearchQuery.value.trim()) {
+                        lastSearchQuery.value = mobileSearchQuery.value.trim();
+                        console.log('移动端搜索:', mobileSearchQuery.value);
+                        mobileSearchQuery.value = '';
+                    }
+                };
+
+                const selectSuggestion = (suggestion) => {
+                    searchQuery.value = suggestion.name;
+                    handleSearch();
+                };
+
+                const viewAllResults = () => {
+                    handleSearch();
+                };
+
+                const hideSuggestions = () => {
+                    setTimeout(() => {
+                        showSuggestions.value = false;
+                    }, 200);
+                };
+
+                return {
+                    searchQuery,
+                    mobileSearchQuery,
+                    showSuggestions,
+                    lastSearchQuery,
+                    filteredSuggestions,
+                    mockSearchResults,
+                    handleSearch,
+                    handleMobileSearch,
+                    selectSuggestion,
+                    viewAllResults,
+                    hideSuggestions
+                };
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html> 

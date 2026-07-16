@@ -1,0 +1,95 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "code": "developer",
+      "name": "开发者",
+      "sort": 1,
+      "sceneText": "代码补全、代码自动生成、bug检测、API文档生成 - 让编程更智能高效",
+      "roleIcon": "i-heroicons-code-bracket"
+    },
+    {
+      "id": 2,
+      "code": "content_creator",
+      "name": "内容创作者",
+      "sort": 2,
+      "sceneText": "文章写作、创意构思、内容优化、SEO文案 - 激发无限创作灵感",
+      "roleIcon": "i-heroicons-pencil-square"
+    },
+    {
+      "id": 3,
+      "code": "student",
+      "name": "学生",
+      "sort": 3,
+      "sceneText": "学习辅导、作业解答、知识问答、概念解释 - 个性化学习助手",
+      "roleIcon": "i-heroicons-academic-cap"
+    },
+    {
+      "id": 4,
+      "code": "educator",
+      "name": "教育人士",
+      "sort": 4,
+      "sceneText": "课程设计、教学材料、学习评估、互动教学 - 提升教学效果",
+      "roleIcon": "i-heroicons-users"
+    },
+    {
+      "id": 5,
+      "code": "decision_maker",
+      "name": "决策汇报者",
+      "sort": 5,
+      "sceneText": "数据分析、报告生成、决策支持、商业洞察 - 优化决策过程",
+      "roleIcon": "i-heroicons-presentation-chart-line"
+    },
+    {
+      "id": 6,
+      "code": "designer",
+      "name": "设计师",
+      "sort": 6,
+      "sceneText": "UI设计、图像生成、原型制作、创意构思 - 释放设计创造力",
+      "roleIcon": "i-heroicons-paint-brush"
+    },
+    {
+      "id": 7,
+      "code": "marketer",
+      "name": "营销人",
+      "sort": 7,
+      "sceneText": "广告文案、营销策略、数据分析、用户洞察 - 提升营销转化率",
+      "roleIcon": "i-heroicons-megaphone"
+    },
+    {
+      "id": 8,
+      "code": "researcher",
+      "name": "科研人员",
+      "sort": 8,
+      "sceneText": "文献综述、数据分析、论文写作、研究辅助 - 加速科研进程",
+      "roleIcon": "i-heroicons-beaker"
+    },
+    {
+      "id": 9,
+      "code": "literature_heavy",
+      "name": "重度文献者",
+      "sort": 9,
+      "sceneText": "文献整理、内容分析、摘要提取、知识管理 - 高效处理海量信息",
+      "roleIcon": "i-heroicons-document-text"
+    },
+    {
+      "id": 10,
+      "code": "data_analyst",
+      "name": "数据分析师",
+      "sort": 10,
+      "sceneText": "数据清洗、模型构建、可视化分析、洞察发现 - 从数据中挖掘价值",
+      "roleIcon": "i-heroicons-chart-bar"
+    },
+    {
+      "id": 11,
+      "code": "customer_service",
+      "name": "客服人员",
+      "sort": 11,
+      "sceneText": "智能问答、知识库搜索、客户沟通、问题解决 - 提升服务效率和质量",
+      "roleIcon": "i-heroicons-chat-bubble-left-right"
+    }
+  ],
+  "total": 11,
+  "generated_at": "2026-07-16T05:38:44.961Z"
+}
